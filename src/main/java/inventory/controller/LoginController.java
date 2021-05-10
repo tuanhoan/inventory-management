@@ -94,8 +94,19 @@ public class LoginController {
 
 		return "redirect:/";
 	}
-
-	public void sortMenu(List<Menu> menus) {
+	@GetMapping("/access-denied")
+	public String accessDenied() {
+		return "access-denied";
+	}
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute(Constant.MENU_SESSION);
+		session.removeAttribute(Constant.USER_INFO);
+		return "redirect:/login";
+	}
+	
+	
+	private void sortMenu(List<Menu> menus) {
 		Collections.sort(menus, new Comparator<Menu>() {
 
 			@Override
