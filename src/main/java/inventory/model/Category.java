@@ -11,7 +11,7 @@ import java.util.Set;
 public class Category implements java.io.Serializable {
 
 	private Integer id;
-	private int name;
+	private String name;
 	private String code;
 	private String description;
 	private int activeFlag;
@@ -22,7 +22,7 @@ public class Category implements java.io.Serializable {
 	public Category() {
 	}
 
-	public Category(int name, String code, String description, int activeFlag, Date createDate, Date updateDate) {
+	public Category(String name, String code, String description, int activeFlag, Date createDate, Date updateDate) {
 		this.name = name;
 		this.code = code;
 		this.description = description;
@@ -31,7 +31,7 @@ public class Category implements java.io.Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public Category(int name, String code, String description, int activeFlag, Date createDate, Date updateDate,
+	public Category(String name, String code, String description, int activeFlag, Date createDate, Date updateDate,
 			Set productInfos) {
 		this.name = name;
 		this.code = code;
@@ -50,11 +50,11 @@ public class Category implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public int getName() {
+	public String getName() {
 		return this.name;
 	}
 
-	public void setName(int name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 

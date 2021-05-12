@@ -1,14 +1,18 @@
 package inventory.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,11 +29,14 @@ public class CategoryController {
 	private CategoryValidator categoryValidator;
 	static final Logger log = Logger.getLogger(CategoryController.class);
 
+	@InitBinder
 	private void initBinder(WebDataBinder binder) {
 		if (binder.getTarget() == null) {
 			return;
 		}
-		if (binder.getTarget() == Category.class) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+		if (binder.getTarget().getClass() == Category.class) {
 			binder.setValidator(categoryValidator);
 		}
 	}
@@ -48,11 +55,12 @@ public class CategoryController {
 		model.addAttribute("viewOnly", false);
 		return "category-action";
 	}
-	@GetMapping("/category/edit/id")
+
+	@GetMapping("/category/edit/{id}")
 	public String edit(Model model, @PathVariable("id") int id) {
 		log.info("Edit category with id=" + id);
 		Category category = productService.findByIdCategory(id);
-		if(category!=null) {
+		if (category != null) {
 			model.addAttribute("titlePage", "Edit Category");
 			model.addAttribute("modelForm", category);
 			model.addAttribute("viewOnly", false);
@@ -60,8 +68,10 @@ public class CategoryController {
 		}
 		return "redirect:/category/list";
 	}
-	public String view(Model model, @PathVariable("id") int id) {
-		log.info("View category with id=" + id);
+
+	@GetMapping("/category/view/{id}")
+	public String view(Model model , @PathVariable("id") int id) {
+		log.info("View category with id="+id);
 		Category category = productService.findByIdCategory(id);
 		if(category!=null) {
 			model.addAttribute("titlePage", "View Category");
@@ -71,28 +81,38 @@ public class CategoryController {
 		}
 		return "redirect:/category/list";
 	}
+
 	@PostMapping("/category/save")
 	public String save(Model model, @ModelAttribute("modelForm") Category category, BindingResult result) {
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
+			if (category.getId() != null) {
+				model.addAttribute("titlePage", "Edit Category");
+			} else {
+				model.addAttribute("titlePage", "Add Category");
+			}
+
+			model.addAttribute("modelForm", category);
+			model.addAttribute("viewOnly", false);
 			return "category-action";
 		}
-		if(category.getId()!=null && category.getId() != 0) {
+		if (category.getId() != null && category.getId() != 0) {
 			productService.updateCategory(category);
 			model.addAttribute("message", "update success!!!");
-		}
-		else {
+		} else {
 			productService.saveCategory(category);
 			model.addAttribute("message", "insert success!!!");
 		}
 		return showCategoryList(model);
 	}
+
 	@GetMapping("/category/delete/{id}")
 	public String delete(Model model, @PathVariable("id") int id) {
 		log.info("Delete  category with id=" + id);
 		Category category = productService.findByIdCategory(id);
-		if(category!=null) {
+		if (category != null) {
 			productService.deleteCategory(category);
 		}
 		return "redirect:/category/list";
 	}
+
 }
