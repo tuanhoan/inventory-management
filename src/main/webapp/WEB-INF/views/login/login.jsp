@@ -1,109 +1,73 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@page language="java" pageEncoding="UTF-8"%>
-<%@page contentType="text/html; charset=UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@page language="java" pageEncoding="UTF-8" %>
+<%@page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<head>
+    <title>Inventory Management | </title>
 
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
+    <!-- Bootstrap -->
+    <link href="<c:url value="/resources/vendors/bootstrap/dist/css/bootstrap.min.css"/>" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="<c:url value="/resources/vendors/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="<c:url value="/resources/vendors/nprogress/nprogress.css"/>" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="<c:url value="/resources/vendors/animate.css/animate.min.css"/>" rel="stylesheet">
 
-<title>Inventory-Management - Login</title>
+    <!-- Custom Theme Style -->
+    <link href="<c:url value="/resources/build/css/custom.min.css"/>" rel="stylesheet">
+  </head>
 
-<!-- Custom fonts for this template-->
-<link
-	href="<c:url value="/resources/vendor/fontawesome-free/css/all.min.css"/>"
-	rel="stylesheet" type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet">
+  <body class="login">
+    <div>
 
-<!-- Custom styles for this template-->
-<link href="<c:url value="/resources/css/sb-admin-2.min.css"/>"
-	rel="stylesheet">
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form:form modelAttribute="loginForm" servletRelativeAction="/processLogin" method="POST" >
+              <h1>Login Form</h1>
+              <div>
+                <form:input path="userName" cssClass="form-control" placeholder="Username"/>
+                <div class="has-error">
+                	<form:errors path="userName" cssClass="help-block"></form:errors>
+                </div>
+              </div>
+              <div>
+                <form:password path="password" cssClass="form-control" placeholder="Password" />
+                <div class="has-error">
+                	<form:errors path="password" cssClass="help-block"></form:errors>
+                </div>
+              </div>
+              <div>
+                <button class="btn btn-default submit" type="submit">Log in</button>
+              </div>
 
-</head>
+              <div class="clearfix"></div>
 
-<body class="bg-gradient-primary">
+              <div class="separator">
 
-	<div class="container">
+                <div class="clearfix"></div>
+                <br />
 
-		<!-- Outer Row -->
-		<div class="row justify-content-center">
+                <div>
+                  <h1><i class="fa fa-paw"></i> Inventory Management System!</h1>
+                  <p>©2019 Inventory Management System. Privacy and Terms</p>
+                </div>
+              </div>
+            </form:form>
+          </section>
+        </div>
 
-			<div class="col-xl-10 col-lg-12 col-md-9">
-
-				<div class="card o-hidden border-0 shadow-lg my-5">
-					<div class="card-body p-0">
-						<!-- Nested Row within Card Body -->
-						<div class="row">
-							<div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-							<div class="col-lg-6">
-								<div class="p-5">
-									<div class="text-center">
-										<h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-									</div>
-									<form:form modelAttribute="loginForm"
-										servletRelativeAction="/processLogin" method="POST"
-										class="user">
-										<div class="form-group">
-											<form:input path="userName"
-												cssClass="form-control form-control-user"
-												placeholder="Enter UserName..." />
-											<div class="has-error">
-												<form:errors path="userName" cssClass="help-block"></form:errors>
-											</div>
-										</div>
-										<div class="form-group">
-											<form:password path="password"
-												cssClass="form-control form-control-user"
-												placeholder="Password" />
-											<div class="has-error">
-												<form:errors path="password" cssClass="help-block"></form:errors>
-											</div>
-										</div>
-										<button type="submit"
-											class="btn btn-primary btn-user btn-block">Login</button>
-										<hr>
-										<a href="index.html" class="btn btn-google btn-user btn-block">
-											<i class="fab fa-google fa-fw"></i> Login with Google
-										</a>
-										<a href="index.html"
-											class="btn btn-facebook btn-user btn-block"> <i
-											class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-										</a>
-									</form:form>
-									<hr>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-		</div>
-
-	</div>
-
-	<!-- Bootstrap core JavaScript-->
-	<script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
-	<script
-		src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
-
-	<!-- Core plugin JavaScript-->
-	<script
-		src="<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js"/>"></script>
-
-	<!-- Custom scripts for all pages-->
-	<script src="<c:url value="/resources/js/sb-admin-2.min.js"/>"></script>
-
-</body>
-
+        
+      </div>
+    </div>
+  </body>
 </html>

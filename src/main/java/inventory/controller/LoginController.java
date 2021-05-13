@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,68 +29,59 @@ import inventory.validate.LoginValidator;
 
 @Controller
 public class LoginController {
-	final static Logger log = Logger.getLogger(UserService.class);
-	@Autowired
+	@Autowired 
 	private UserService userService;
 	@Autowired
 	private LoginValidator loginValidator;
-
 	@InitBinder
-	private void InitBinder(WebDataBinder binder) {
-		if (binder.getTarget() == null)
-			return;
-		if (binder.getTarget().getClass() == Users.class) {
+	private void initBinder(WebDataBinder binder) {
+		if(binder.getTarget()==null) return;
+		if(binder.getTarget().getClass() == Users.class) {
 			binder.setValidator(loginValidator);
 		}
 	}
-
 	@GetMapping("/login")
 	public String login(Model model) {
 		model.addAttribute("loginForm", new Users());
 		return "login/login";
 	}
-
 	@PostMapping("/processLogin")
-	public String processLogin(Model model, @ModelAttribute("loginForm") @Validated Users users, BindingResult result,
-			HttpSession session) {
-		if (result.hasErrors()) {
+	public String processLogin(Model model , @ModelAttribute("loginForm")@Validated Users users , BindingResult result , HttpSession session) {
+		if(result.hasErrors()) {
 			return "login/login";
 		}
-		Users user = userService.findByProperty("userName", users.getUserName()).get(0);
+	
+		Users user  = userService.findByProperty("userName", users.getUserName()).get(0);
 		UserRole userRole =(UserRole) user.getUserRoles().iterator().next();
 		List<Menu> menuList = new ArrayList<>();
 		Role role = userRole.getRole();
 		List<Menu> menuChildList = new ArrayList<>();
-		for (Object obj : role.getAuths()) {
+		for(Object obj : role.getAuths()) {
 			Auth auth = (Auth) obj;
 			Menu menu = auth.getMenu();
-			if (menu.getParentId() == 0 && menu.getOrderIndex() != -1 && menu.getActiveFlag() == 1
-					&& auth.getPermission() == 1 && auth.getActiveFlag() == 1) {
-				menu.setIdMenu(menu.getUrl().replace("/", "") + "Id");
+			if(menu.getParentId()==0 && menu.getOrderIndex()!=-1 && menu.getActiveFlag()==1 && auth.getPermission()==1 && auth.getActiveFlag()==1) {
+				menu.setIdMenu(menu.getUrl().replace("/", "")+"Id"); 
 				menuList.add(menu);
-			} else if (menu.getParentId() != 0 && menu.getOrderIndex() != -1 && menu.getActiveFlag() == 1
-					&& auth.getPermission() == 1 && auth.getActiveFlag() == 1) {
-				menu.setIdMenu(menu.getUrl().replace("/", "") + "Id");
+			}else if( menu.getParentId()!=0 && menu.getOrderIndex()!=-1 && menu.getActiveFlag()==1 && auth.getPermission()==1 && auth.getActiveFlag()==1) {
+				menu.setIdMenu(menu.getUrl().replace("/", "")+"Id"); 
 				menuChildList.add(menu);
 			}
 		}
-		for (Menu menu : menuList) {
+		for(Menu menu : menuList) {
 			List<Menu> childList = new ArrayList<>();
-			for (Menu childMenu : menuChildList) {
-				if (childMenu.getParentId() == menu.getId()) {
+			for(Menu childMenu : menuChildList) {
+				if(childMenu.getParentId()== menu.getId()) {
 					childList.add(childMenu);
 				}
 			}
 			menu.setChild(childList);
 		}
 		sortMenu(menuList);
-		for (Menu menu : menuList) {
+		for(Menu menu : menuList) {
 			sortMenu(menu.getChild());
 		}
 		session.setAttribute(Constant.MENU_SESSION, menuList);
-		log.info(menuList);
 		session.setAttribute(Constant.USER_INFO, user);
-
 		return "redirect:/";
 	}
 	@GetMapping("/access-denied")
@@ -105,14 +95,13 @@ public class LoginController {
 		return "redirect:/login";
 	}
 	
-	
 	private void sortMenu(List<Menu> menus) {
 		Collections.sort(menus, new Comparator<Menu>() {
-
 			@Override
 			public int compare(Menu o1, Menu o2) {
 				return o1.getOrderIndex() - o2.getOrderIndex();
 			}
 		});
 	}
+
 }

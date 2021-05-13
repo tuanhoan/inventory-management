@@ -1,18 +1,12 @@
 package inventory.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class IndexController {
-	@RequestMapping(value = "/")
-	public String indString() {
+	@GetMapping(value= {"/index","/"})
+	public String index() {
 		return "index";
 	}
-//	public ModelAndView index() {
-//
-//		ModelAndView mView = new ModelAndView();
-//		mView.setViewName("index");
-//		return mView;
-//	}
 }

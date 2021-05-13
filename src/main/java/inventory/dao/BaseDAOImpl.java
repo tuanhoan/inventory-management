@@ -2,6 +2,7 @@ package inventory.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,18 +12,40 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import inventory.model.Paging;
 @Repository
 @Transactional(rollbackFor =Exception.class)
 public class BaseDAOImpl<E> implements BaseDAO<E>{
 	final static Logger log = Logger.getLogger(BaseDAOImpl.class);
 	@Autowired
 	SessionFactory sessionFactory;
-	public List<E> findAll() {
+	public List<E> findAll(String queryStr , Map<String, Object> mapParams,Paging paging) {
 		log.info("find all record from db");
 		StringBuilder queryString = new StringBuilder("");
+		StringBuilder countQuery = new StringBuilder();
+		countQuery.append(" select count(*) from ").append(getGenericName()).append(" as model where model.activeFlag=1");
 		queryString.append(" from ").append(getGenericName()).append(" as model where model.activeFlag=1");
+		if(queryStr!=null && !queryStr.isEmpty()) {
+			queryString.append(queryStr);
+			countQuery.append(queryStr);
+		}
+		Query<E> query  = sessionFactory.getCurrentSession().createQuery(queryString.toString());
+		Query<E> countQ = sessionFactory.getCurrentSession().createQuery(countQuery.toString());
+		if(mapParams!=null && !mapParams.isEmpty()) {
+			for(String key : mapParams.keySet()) {
+				query.setParameter(key, mapParams.get(key));
+				countQ.setParameter(key, mapParams.get(key));
+			}
+		}
+		if(paging!=null) {
+			query.setFirstResult(paging.getOffset());
+			query.setMaxResults(paging.getRecordPerPage());
+			long totalRecords = (long)countQ.uniqueResult();
+			paging.setTotalRows(totalRecords);
+		}
 		log.info( "Query find all ====>" +queryString.toString());
-		return sessionFactory.getCurrentSession().createQuery(queryString.toString()).list();
+		return query.list();
 	}
 
 	public E findById(Class<E> e, Serializable id) {
@@ -33,12 +56,10 @@ public class BaseDAOImpl<E> implements BaseDAO<E>{
 	public List<E> findByProperty(String property, Object value) {
 		log.info("Find by property");
 		StringBuilder queryString = new StringBuilder();
-		log.info(value);
 		queryString.append(" from ").append(getGenericName()).append(" as model where model.activeFlag=1 and model.").append(property).append("='").append(value).append("'");
 		log.info(" query find by property ===>"+queryString.toString());
 		Query<E> query = sessionFactory.getCurrentSession().createQuery(queryString.toString());
-		//query.setParameter(0, "admin");
-		System.out.println(query);
+		//query.setParameter(0, value);
 		return query.getResultList();
 		
 	}

@@ -1,112 +1,115 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
-<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<head>
+    <title>Inventory Management | </title>
 
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
+    <!-- Bootstrap -->
+    <link href="<c:url value="/resources/vendors/bootstrap/dist/css/bootstrap.min.css"/>" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="<c:url value="/resources/vendors/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="<c:url value="/resources/vendors/nprogress/nprogress.css"/>" rel="stylesheet">
+    <!-- jQuery custom content scroller -->
+    <link href="<c:url value="/resources/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css"/>" rel="stylesheet"/>
 
-<title>Inventory-Management</title>
+    <!-- Custom Theme Style -->
+    <link href="<c:url value="/resources/build/css/custom.min.css"/>" rel="stylesheet">
+     <!-- PNotify -->
+    <link href="<c:url value="/resources/vendors/pnotify/dist/pnotify.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/vendors/pnotify/dist/pnotify.buttons.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/vendors/pnotify/dist/pnotify.nonblock.css"/>" rel="stylesheet">
+      <!-- jQuery -->
+    <script src="<c:url value="/resources/vendors/jquery/dist/jquery.min.js"/>"></script>
+  </head>
 
-<!-- Custom fonts for this template-->
-<link
-	href="<c:url value="/resources/vendor/fontawesome-free/css/all.min.css"/>"
-	rel="stylesheet" type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet">
+  <body class="nav-md ">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="<c:url value="/"/>" class="site_title"><i class="fa fa-paw"></i> <span>Inventory Management!</span></a>
+            </div>
 
-<!-- Custom styles for this template-->
-<link href="<c:url value="/resources/css/sb-admin-2.min.css"/>"
-	rel="stylesheet">
+            <div class="clearfix"></div>
 
-</head>
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="<c:url value="/resources/images/user.png" />"alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Welcome,</span>
+                <h2>${userInfo.name}</h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
 
-<body id="page-top">
+            <br />
 
-	<!-- Page Wrapper -->
-	<div id="wrapper">
+            <!-- sidebar menu -->
+           	<tiles:insertAttribute name="sidebar"></tiles:insertAttribute>
+            <!-- /sidebar menu -->
 
-		<!-- Sidebar -->
-		<tiles:insertAttribute name="sidebar"></tiles:insertAttribute>
-		<!-- End of Sidebar -->
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<c:url value='/logout'/>">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
 
-		<!-- Content Wrapper -->
-		<div id="content-wrapper" class="d-flex flex-column">
+        <!-- top navigation -->
+        <tiles:insertAttribute name="top-nav"></tiles:insertAttribute>
+        <!-- /top navigation -->
 
-			<!-- Main Content -->
-			<div id="content">
+        <!-- page content -->
+        <tiles:insertAttribute name="body"></tiles:insertAttribute>
+        <!-- /page content -->
 
-				<!-- Topbar -->
-				<tiles:insertAttribute name="top-nav"></tiles:insertAttribute>
-				<!-- End of Topbar -->
+        <!-- footer content -->
+        <tiles:insertAttribute name="footer"></tiles:insertAttribute>
+        <!-- /footer content -->
+      </div>
+    </div>
 
-				<!-- Begin Page Content -->
-				<tiles:insertAttribute name="body"></tiles:insertAttribute>
-				<!-- /.container-fluid -->
+  
+    <!-- Bootstrap -->
+    <script src="<c:url value="/resources/vendors/bootstrap/dist/js/bootstrap.min.js"/>"></script>
+    <!-- FastClick -->
+    <script src="<c:url value="/resources/vendors/fastclick/lib/fastclick.js"/>"></script>
+    <!-- NProgress -->
+    <script src="<c:url value="/resources/vendors/nprogress/nprogress.js"/>"></script>
+    <!-- jQuery custom content scroller -->
+    <script src="<c:url value="/resources/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"/>"></script>
+     <!-- PNotify -->
+    <script src="<c:url value="/resources/vendors/pnotify/dist/pnotify.js"/>"></script>
+    <script src="<c:url value="/resources/vendors/pnotify/dist/pnotify.buttons.js"/>"></script>
+    <script src="<c:url value="/resources/vendors/pnotify/dist/pnotify.nonblock.js"/>"></script>
+    
 
-			</div>
-			<!-- End of Main Content -->
-
-			<!-- Footer -->
-			<tiles:insertAttribute name="footer"></tiles:insertAttribute>
-			<!-- End of Footer -->
-
-		</div>
-		<!-- End of Content Wrapper -->
-
-	</div>
-	<!-- End of Page Wrapper -->
-
-	<!-- Scroll to Top Button-->
-	<a class="scroll-to-top rounded" href="#page-top"> <i
-		class="fas fa-angle-up"></i>
-	</a>
-
-	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-					<button class="close" type="button" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">Select "Logout" below if you are ready
-					to end your current session.</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button"
-						data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="<c:url value="/logout"/>">Logout</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Bootstrap core JavaScript-->
-	<script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
-	<script
-		src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
-
-	<!-- Core plugin JavaScript-->
-	<script
-		src="<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js"/>"></script>
-
-	<!-- Custom scripts for all pages-->
-	<script src="<c:url value="/resources/js/sb-admin-2.min.js"/>"></script>
-
-</body>
-
+    <!-- Custom Theme Scripts -->
+    <script src="<c:url value="/resources/build/js/custom.js"/>"></script>
+  </body>
 </html>
