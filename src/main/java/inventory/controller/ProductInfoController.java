@@ -52,7 +52,7 @@ public class ProductInfoController {
 		}
 	}
 
-	@RequestMapping(value = { "/product-info/list", "/product-info/list/" }) 
+	@RequestMapping(value = { "/product-info/list", "/product-info/list/" })
 	public String redirect() {
 		return "redirect:/product-info/list/1";
 	}
