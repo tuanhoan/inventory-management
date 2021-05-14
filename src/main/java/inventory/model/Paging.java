@@ -2,7 +2,7 @@ package inventory.model;
 
 public class Paging {
 	private long totalRows;
-	private long totalPages;
+	private int totalPages;
 	private int indexPage;
 	private int recordPerPage = 10;
 	private int offset;
@@ -11,36 +11,23 @@ public class Paging {
 		this.recordPerPage = recordPerPage;
 	}
 
-	public Paging() {
-		super();
-	}
-
-	public Paging(long totalRows, long totalPages, int indexPage, int recordPerPage, int offset) {
-		super();
-		this.totalRows = totalRows;
-		this.totalPages = totalPages;
-		this.indexPage = indexPage;
-		this.recordPerPage = recordPerPage;
-		this.offset = offset;
-	}
-
 	public long getTotalRows() {
 		return totalRows;
 	}
 
 	public void setTotalRows(long totalRows) {
-		if(totalPages>0) {
-			totalPages = (int) Math.ceil(totalRows/(double)recordPerPage);
-		}
 		this.totalRows = totalRows;
 	}
 
-	public long getTotalPages() {
+	public int getTotalPages() {
+		if (totalRows > 0) {
+			totalPages = (int) Math.ceil(totalRows / (double) recordPerPage);
+		}
 		return totalPages;
 	}
 
-	public void setTotalPages(long totalRecord) {
-		this.totalPages = totalRecord;
+	public void setTotalPages(int totalPages) {
+		this.totalPages = totalPages;
 	}
 
 	public int getIndexPage() {
@@ -60,13 +47,14 @@ public class Paging {
 	}
 
 	public int getOffset() {
+		if (indexPage > 0) {
+			offset = indexPage * recordPerPage - recordPerPage;
+		}
 		return offset;
 	}
 
 	public void setOffset(int offset) {
-		if(indexPage>0) {
-			offset = indexPage*recordPerPage-recordPerPage;
-		}
 		this.offset = offset;
 	}
+
 }
