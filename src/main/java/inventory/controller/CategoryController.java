@@ -117,22 +117,22 @@ public class CategoryController {
 		if(category.getId()!=null && category.getId()!=0) {
 			try {
 				productService.updateCategory(category);
-				session.setAttribute(Constant.MSG_SUCCESS, "Update success!!!");
+				session.setAttribute(Constant.MSG_SUCCESS, "Cập nhật thành công!!!");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				log.error(e.getMessage());
-				session.setAttribute(Constant.MSG_ERROR, "Update has error");
+				session.setAttribute(Constant.MSG_ERROR, "Có lỗi xảy ra khi cập nhật!!!");
 			}
 			
 		}else {
 				try {
 					productService.saveCategory(category);
-					session.setAttribute(Constant.MSG_SUCCESS, "Insert success!!!");
+					session.setAttribute(Constant.MSG_SUCCESS, "Thêm thành công!!!");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					session.setAttribute(Constant.MSG_ERROR, "Insert has error!!!");
+					session.setAttribute(Constant.MSG_ERROR, "Có lỗi xảy ra khi thêm vào!!!");
 				}
 		}
 		return "redirect:/category/list";
@@ -145,11 +145,11 @@ public class CategoryController {
 		if(category!=null) {
 			try {
 				productService.deleteCategory(category);
-				session.setAttribute(Constant.MSG_SUCCESS, "Delete success!!!");
+				session.setAttribute(Constant.MSG_SUCCESS, "Xoá thành công!!!");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				session.setAttribute(Constant.MSG_ERROR, "Delete has error!!!");
+				session.setAttribute(Constant.MSG_ERROR, "Có lỗi xảy ra khi xoá!!!");
 			}
 		}
 		return "redirect:/category/list";

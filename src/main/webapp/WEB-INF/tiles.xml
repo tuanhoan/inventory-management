@@ -53,4 +53,36 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/invoice/goods-receipt-action.jsp"></put-attribute>
 	</definition>
+	<definition name="goods-issue-list" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/invoice/goods-issue-list.jsp"></put-attribute>
+	</definition>
+	<definition name="goods-issue-action" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/invoice/goods-issue-action.jsp"></put-attribute>
+	</definition>
+	<definition name="user-list" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/users/user-list.jsp"></put-attribute>
+	</definition>
+	<definition name="user-action" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/users/user-action.jsp"></put-attribute>
+	</definition>
+		<definition name="role-list" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/role/role-list.jsp"></put-attribute>
+	</definition>
+	<definition name="role-action" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/role/role-action.jsp"></put-attribute>
+	</definition>
+	<definition name="menu-list" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/menu/menu-list.jsp"></put-attribute>
+	</definition>
+		<definition name="menu-permission" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/menu/menu-permission.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

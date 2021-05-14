@@ -152,22 +152,22 @@ public class ProductInfoController {
 			try {
 
 				productService.updateProductInfo(productInfo);
-				session.setAttribute(Constant.MSG_SUCCESS, "Update success!!!");
+				session.setAttribute(Constant.MSG_SUCCESS, "Cập nhật thành công!!!");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				log.error(e.getMessage());
-				session.setAttribute(Constant.MSG_ERROR, "Update has error");
+				session.setAttribute(Constant.MSG_ERROR, "Có lỗi xảy ra khi cập nhật!!!");
 			}
 
 		} else {
 			try {
 				productService.saveProductInfo(productInfo);
-				session.setAttribute(Constant.MSG_SUCCESS, "Insert success!!!");
+				session.setAttribute(Constant.MSG_SUCCESS, "Thêm thành công!!!");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				session.setAttribute(Constant.MSG_ERROR, "Insert has error!!!");
+				session.setAttribute(Constant.MSG_ERROR, "Có lỗi xảy ra khi thêm!!!");
 			}
 		}
 		return "redirect:/product-info/list";
@@ -181,11 +181,11 @@ public class ProductInfoController {
 		if (productInfo != null) {
 			try {
 				productService.deleteProductInfo(productInfo);
-				session.setAttribute(Constant.MSG_SUCCESS, "Delete success!!!");
+				session.setAttribute(Constant.MSG_SUCCESS, "Xoá thành công!!!");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				session.setAttribute(Constant.MSG_ERROR, "Delete has error!!!");
+				session.setAttribute(Constant.MSG_ERROR, "Có lỗi xảy ra khi xoá!!!");
 			}
 		}
 		return "redirect:/product-info/list";
