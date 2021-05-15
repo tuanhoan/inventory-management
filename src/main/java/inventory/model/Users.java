@@ -1,5 +1,5 @@
 package inventory.model;
-// Generated May 10, 2021, 4:18:41 PM by Hibernate Tools 5.4.30.Final
+// Generated May 15, 2021, 11:06:35 AM by Hibernate Tools 5.4.30.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -19,7 +19,16 @@ public class Users implements java.io.Serializable {
 	private Date createDate;
 	private Date updateDate;
 	private Set userRoles = new HashSet(0);
+	private Set userLinks = new HashSet(0);
 	private Integer roleID;
+
+	public Integer getRoleID() {
+		return roleID;
+	}
+
+	public void setRoleID(Integer roleID) {
+		this.roleID = roleID;
+	}
 
 	public Users() {
 	}
@@ -36,7 +45,7 @@ public class Users implements java.io.Serializable {
 	}
 
 	public Users(String userName, String password, String email, String name, int activeFlag, Date createDate,
-			Date updateDate, Set userRoles) {
+			Date updateDate, Set userRoles, Set userLinks) {
 		this.userName = userName;
 		this.password = password;
 		this.email = email;
@@ -45,6 +54,7 @@ public class Users implements java.io.Serializable {
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 		this.userRoles = userRoles;
+		this.userLinks = userLinks;
 	}
 
 	public Integer getId() {
@@ -119,11 +129,12 @@ public class Users implements java.io.Serializable {
 		this.userRoles = userRoles;
 	}
 
-	public Integer getRoleID() {
-		return roleID;
+	public Set getUserLinks() {
+		return this.userLinks;
 	}
 
-	public void setRoleID(Integer roleID) {
-		this.roleID = roleID;
+	public void setUserLinks(Set userLinks) {
+		this.userLinks = userLinks;
 	}
+
 }

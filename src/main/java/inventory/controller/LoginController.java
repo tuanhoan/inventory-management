@@ -63,7 +63,11 @@ public class LoginController {
 				menu.setIdMenu(menu.getUrl().replace("/", "")+"Id"); 
 				menuList.add(menu);
 			}else if( menu.getParentId()!=0 && menu.getOrderIndex()!=-1 && menu.getActiveFlag()==1 && auth.getPermission()==1 && auth.getActiveFlag()==1) {
+				
 				menu.setIdMenu(menu.getUrl().replace("/", "")+"Id"); 
+				if(menu.getParentId()==4) {
+					System.out.println(menu);
+				}
 				menuChildList.add(menu);
 			}
 		}
@@ -82,7 +86,7 @@ public class LoginController {
 		}
 		session.setAttribute(Constant.MENU_SESSION, menuList);
 		session.setAttribute(Constant.USER_INFO, user);
-		return "redirect:/index";
+		return "redirect:/";
 	}
 	@GetMapping("/access-denied")
 	public String accessDenied() {

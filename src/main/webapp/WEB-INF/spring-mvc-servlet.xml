@@ -57,8 +57,10 @@
 				<value>inventory/model/mapping/ProductInfo.hbm.xml</value>
 				<value>inventory/model/mapping/ProductInStock.hbm.xml</value>
 				<value>inventory/model/mapping/Role.hbm.xml</value>
-				<value>inventory/model/mapping/UserRole.hbm.xml</value>
-				<value>inventory/model/mapping/Users.hbm.xml</value>
+				<value>inventory/model/mapping/UserRole.hbm.xml</value> 
+				<value>inventory/model/mapping/Users.hbm.xml</value> 
+				<value>inventory/model/mapping/Link.hbm.xml</value>
+				<value>inventory/model/mapping/UserLink.hbm.xml</value> 
 			</list>
 
 		</property>

@@ -75,11 +75,11 @@ public class MenuController {
 	public String change(Model model, @PathVariable("id") int id, HttpSession session) {
 		try {
 			menuService.changeStatus(id);
-			session.setAttribute(Constant.MSG_SUCCESS, "Change status success!!!");
+			session.setAttribute(Constant.MSG_SUCCESS, "Thay đổi trạng thái thành công!!!");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			session.setAttribute(Constant.MSG_ERROR, "Change status has error!!!");
+			session.setAttribute(Constant.MSG_ERROR, "Có lỗi xảy ra khi thay đổi trạng thái!!!");
 		}
 		return "redirect:/menu/list";
 	}
@@ -94,11 +94,11 @@ public class MenuController {
 	public String updatePermission(Model model,HttpSession session,@ModelAttribute("modelForm") AuthForm authForm ) {
 		try {
 			menuService.updatePermission(authForm.getRoleId(), authForm.getMenuId(), authForm.getPermission());
-			session.setAttribute(Constant.MSG_SUCCESS, "Update success!!!");
+			session.setAttribute(Constant.MSG_SUCCESS, "Cập nhật thành công!!!");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			session.setAttribute(Constant.MSG_ERROR, "Update has error!!!");
+			session.setAttribute(Constant.MSG_ERROR, "Có lỗi xảy ra khi cập nhật!!!");
 		}
 		return "redirect:/menu/list";
 	}
